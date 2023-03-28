@@ -72,7 +72,7 @@ const menu = [
     desc: `skateboard fam synth authentic semiotics. Live-edge lyft af, edison bulb yuccie crucifix microdosing.`,
   },
   {
-    id: 12,
+    id: 13,
     title: "bison steak",
     category: "dinner",
     price: 22.99,
