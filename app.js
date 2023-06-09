@@ -81,8 +81,10 @@ const menu = [
   },
 ];
 
-let menuhtml = menu.map(function (value) {
-  return `  <article class="menu-item">
+display(menu);
+function display(array) {
+  let menuhtml = array.map(function (value,index) {
+    return `  <article class="menu-item">
   <img src="${value.img}" alt="menu item" class="photo"
   <div class="item-info">
     <header>
@@ -92,7 +94,137 @@ let menuhtml = menu.map(function (value) {
     <p class="item-text">
       ${value.desc}
     </p>
-  </div>
+     <button type="button" class="btn btn-primary" onclick="addtocart(${index})">addtocart</button>
+    </div>
+    
+  
 </article>`;
-});
-document.getElementById("menu").innerHTML = menuhtml.join("");
+  });
+
+  let but = array.map(function (value) {
+    return ` <button type="button" class="filter-btn" data-id="shakes" onclick="filtermenu('${value.category}')">
+ ${value.category}
+ </button>`;
+  });
+  document.getElementById("btn").innerHTML = but.join("");
+  document.getElementById("menu").innerHTML = menuhtml.join("");
+}
+
+function filtermenu(category) {
+  let filterarray = menu.filter(function (value) {
+    return value.category == category;
+  });
+  console.log(filterarray);
+  display(filterarray);
+}
+let carts=[];
+function addtocart(index){
+let myindex=menu[index]
+  let d=carts.findIndex(function(value){
+    return myindex.title==value.title;
+  });
+  if(d<0){
+    myindex["quan"]=1;
+    carts.push(myindex);
+  }
+  else {
+    carts[index].quan = carts[index].quan + 1;
+  }
+  document.getElementById("col-3").innerText=carts.length;
+}
+
+function price()
+{
+  let p=carts.reduce(function(pre,cuu){
+    return pre+cuu.quan*cuu.price;
+  },0)
+  console.log(p);
+  document.getElementById("col-4").innerText=p;
+  
+}
+function asc(){
+  let d=menu.sort(function(a,b){
+    if(a.price > b.price){
+      return 1;
+    }
+    else{
+      return -1;
+    } 
+  });
+  display(d);
+}
+function des(){
+  let d=menu.sort(function(a,b){
+    if(a.price > b.price){
+      return -1;
+    }
+    else{
+      return 1;
+    } 
+  });
+  display(d);
+}
+function arrangeData(){
+  let d=document.getElementById("sel").value;
+  menu.sort(function(a,b){
+    if(d=="PA"){
+      if(a.price>b.price){
+        return 1;
+      }
+      else
+      {
+        return -1;
+      }
+    }
+    
+     else if(d=="PD"){
+        if(a.price>b.price){
+          return -1;
+        }
+        else{
+          return 1;
+        }
+      }
+else if(d=="CA"){
+  if(a.category>b.category){
+    return 1;
+  }
+  else{
+    return -1;
+  }
+}
+else {
+  if(a.category<b.category){
+    return -1;
+  }
+  else{
+    return 1;
+  }
+}
+    
+  });
+  display(menu);
+}
+
+
+function filterData()
+{
+  let t = document.getElementById("fi").value;
+  let searchTerm = document.getElementById("searchTerm").value
+  let fil = menu.filter(function(value){
+
+    if(t == "C")
+    {
+      return value.category  == searchTerm;
+
+    }
+    else if(t == "P")
+    {
+      return value.price == searchTerm;
+    } 
+
+  })
+
+  display(fil);
+
+}

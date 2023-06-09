@@ -4,6 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Menu</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <!-- font-awesome -->
     <link
       rel="stylesheet"
@@ -19,6 +22,28 @@
         <h2>our menu</h2>
         <div class="underline"></div>
       </div>
+    <button type="button" class="btn btn-primary" id="col-1">cartbutton<span id="col-3">0</span></button>
+    <button type="button" class="btn btn-primary" id="col-2" onclick="price()">price<span id="col-4">0</span></button>
+   <!---- <button type="button" class="btn btn-primary" id="col-5" onclick="asc()">asc</button>
+
+<button type="button" class="btn btn-primary" id="col-5" onclick="des()">des</button>-->
+<select  id="fi">
+  <option value="P">Price</option>
+  <option value="C">Category</option>
+</select>
+
+<input type="text" id="searchTerm" />
+
+<input type="button" value="Search"  onclick="filterData()"/>
+
+
+ <select onchange="arrangeData()" id="sel">
+
+        <option value="CA">category asc</option>
+        <option value="CD">category desc</option>
+        <option value="PD">price high to low</option>
+        <option value="PA">price low to high</option>
+      </select>
       <!-- filter buttons -->
       <div class="btn-container" id="btn">
         <button type="button" class="filter-btn" data-id="all">all</button>
@@ -45,10 +70,13 @@
               Repudiandae, sint quam. Et reprehenderit fugiat nesciunt inventore
               laboriosam excepturi! Quo, officia.
             </p>
+            
+            
           </div>
         </article>
       </div>
     </section>
+
     <!-- javascript -->
     <script src="app.js"></script>
   </body>
